@@ -14,8 +14,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home notify={notify} />} />
         <Route path="/shorturl/:shortUrl" element={<ShortUrl />} />
-        <Route path="/track/:shortUrl" element={<Track notify={notify} />} />
-        <Route path="/track_url_count" element={<UrlCounter />} />
+        <Route path="/track/:totalClicks" element={<Track />} />
+        <Route
+          path="/track_url_count"
+          element={<UrlCounter notify={notify} />}
+        />
       </Routes>
       <ToastContainer
         position="bottom-left"
