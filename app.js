@@ -13,10 +13,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "view/build")));
   app.use("/api", urlRouter);
+  app.use("/", redirectUrlRouter);
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "view", "build", "index.html"));
   });
-  app.use("/", redirectUrlRouter);
 } else {
   app.use("/api", urlRouter);
   app.use("/", redirectUrlRouter);
