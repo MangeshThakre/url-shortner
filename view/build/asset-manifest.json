@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.4d02b4cf.css",
-    "main.js": "/static/js/main.61e93503.js",
+    "main.js": "/static/js/main.e3f4812e.js",
     "static/js/787.54ab60a8.chunk.js": "/static/js/787.54ab60a8.chunk.js",
     "static/media/vecteezy_background-abstract_hk1220.jpg": "/static/media/vecteezy_background-abstract_hk1220.d6aa43864d76e65f655c.jpg",
     "index.html": "/index.html",
     "main.4d02b4cf.css.map": "/static/css/main.4d02b4cf.css.map",
-    "main.61e93503.js.map": "/static/js/main.61e93503.js.map",
+    "main.e3f4812e.js.map": "/static/js/main.e3f4812e.js.map",
     "787.54ab60a8.chunk.js.map": "/static/js/787.54ab60a8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4d02b4cf.css",
-    "static/js/main.61e93503.js"
+    "static/js/main.e3f4812e.js"
   ]
 }

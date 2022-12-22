@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 function Track({ notify }) {
+  const navigate = useNavigate();
   const { shortUrl } = useParams();
   const [totalClicks, setTotalClicks] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -20,7 +21,7 @@ function Track({ notify }) {
     } catch (error) {
       setLoading(false);
       notify(error.response.data.message, "error");
-      console.log(error);
+      navigate("/track_url_count");
     }
   }
 
