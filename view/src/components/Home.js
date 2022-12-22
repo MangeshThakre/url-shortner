@@ -13,7 +13,7 @@ function Home({ notify }) {
     try {
       const response = await axios({
         method: "POST",
-        url: URL + "/shortUrl",
+        url: URL + "/api/shortUrl",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"

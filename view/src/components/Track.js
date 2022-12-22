@@ -1,6 +1,29 @@
-import { Link, useParams } from "react-router-dom";
-function Track() {
-  const { totalClicks } = useParams();
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+function Track({ notify }) {
+  const navigate = useNavigate();
+  const { shortUrl } = useParams();
+  const [totalClicks, setTotalClicks] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const URL = process.env.REACT_APP_URL;
+  useEffect(() => {
+    getClicks();
+  }, []);
+
+  async function getClicks() {
+    setLoading(true);
+    try {
+      const response = await axios(URL + "/api/clicks/" + shortUrl);
+      const { data } = response.data;
+      setLoading(false);
+      setTotalClicks(data.clicks);
+    } catch (error) {
+      setLoading(false);
+      notify(error.response.data.message, "error");
+      navigate("/track_url_count");
+    }
+  }
 
   return (
     <div className="  px-8 flex flex-col gap-5">
@@ -17,7 +40,7 @@ function Track() {
       <div className="flex flex-col gap-3 max-w-2xl">
         <div className="flex  justify-center">
           <h1 className="text-5xl font-bold  text-[#f4baf4] ">
-            {totalClicks}{" "}
+            {loading ? "LOaDinG..." : totalClicks}{" "}
             <span className="text-sm font-normal text-[#febd61] ">
               {totalClicks > 1 ? "clicks" : "click"}{" "}
             </span>
