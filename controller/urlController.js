@@ -5,6 +5,7 @@ const shortUrl = async (req, res) => {
   try {
     const shortUrlInfo = shortUrlModel({ full: fullUrl });
     const result = await shortUrlInfo.save();
+    result["short"] = "s-" + result.short;
     res.status(200).json({ success: true, data: result });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

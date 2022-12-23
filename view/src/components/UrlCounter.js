@@ -7,8 +7,6 @@ function UrlCounter() {
 
   function getClicks(e) {
     e.preventDefault();
-    // console.log(shortUrl.split("/")[3]);
-
     navigate("/track/" + shortUrl.split("/")[3]);
   }
 
