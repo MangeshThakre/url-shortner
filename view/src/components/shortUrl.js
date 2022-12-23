@@ -7,7 +7,7 @@ function ShortUrl() {
   const URL = process.env.REACT_APP_URL;
   const copyContent = async () => {
     try {
-      await navigator.clipboard.writeText(URL + "/" + shortUrl);
+      await navigator.clipboard.writeText(URL + "/s-" + shortUrl);
       await setIscopied(true);
       setTimeout(() => setIscopied(false), 5000);
     } catch (err) {
