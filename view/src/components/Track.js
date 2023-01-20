@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 function Track({ notify }) {
   const navigate = useNavigate();
-  const { shortUrl } = useParams();
+  const { urlId } = useParams();
   const [totalClicks, setTotalClicks] = useState(0);
   const [loading, setLoading] = useState(false);
   const URL = process.env.REACT_APP_URL;
@@ -14,7 +14,7 @@ function Track({ notify }) {
   async function getClicks() {
     setLoading(true);
     try {
-      const response = await axios(URL + "/api/clicks/" + shortUrl);
+      const response = await axios(URL + "/api/clicks/" + urlId);
       const { data } = response.data;
       setLoading(false);
       setTotalClicks(data.clicks);

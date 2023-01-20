@@ -1,22 +1,25 @@
 const shortUrlModel = require("../models/shortUrl.js");
 
 const shortUrl = async (req, res) => {
-  const { fullUrl } = req.body;
+  const { longUrl } = req.body;
   try {
-    const shortUrlInfo = shortUrlModel({ full: fullUrl });
+    const shortUrlInfo = shortUrlModel({ longUrl });
     const result = await shortUrlInfo.save();
-    result["short"] = "s-" + result.short;
-    res.status(200).json({ success: true, data: result });
+    const shortUrl = process.env.BASE_URL + "/s-" + result.urlId;
+    res.status(200).json({
+      success: true,
+      data: { longUrl: result.longUrl, urlId: result.urlId, shortUrl: shortUrl }
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
 const getClicks = async (req, res) => {
-  const shortUrl = req.params.shortUrl.slice(2);
+  const shortUrlId = req.params.shortUrl.slice(2);
   try {
     const clicks = await shortUrlModel.findOne(
-      { short: shortUrl },
+      { urlId: shortUrlId },
       { clicks: 1 }
     );
     if (!clicks) {
@@ -30,23 +33,4 @@ const getClicks = async (req, res) => {
   }
 };
 
-const redirectToOrignalUrl = async (req, res) => {
-  const shortUrl = req.params[0];
-  try {
-    const result = await shortUrlModel.findOne({
-      short: shortUrl
-    });
-    if (result == null) {
-      return res
-        .status(404)
-        .json({ success: false, message: "invalid short URL" });
-    }
-    result.clicks++;
-    result.save();
-    res.redirect(result.full);
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-};
-
-module.exports = { shortUrl, redirectToOrignalUrl, getClicks };
+module.exports = { shortUrl, getClicks };

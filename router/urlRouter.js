@@ -7,7 +7,8 @@ const {
 } = require("../controller/urlController.js");
 const validateUrl = require("../meddleware/checkValidUrl.js");
 
+
+
 urlRouter.post("/shortUrl", validateUrl, shortUrl);
-urlRouter.get("/:shortUrl", redirectToOrignalUrl);
 urlRouter.get("/clicks/:shortUrl", getClicks);
 module.exports = urlRouter;

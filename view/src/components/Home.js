@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 function Home({ notify }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [fullUrl, setFullUrl] = useState("");
+  const [longUrl, setLongUrl] = useState("");
   const URL = process.env.REACT_APP_URL;
   async function submit(e) {
     e.preventDefault();
@@ -18,11 +18,11 @@ function Home({ notify }) {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        data: { fullUrl: fullUrl }
+        data: { longUrl: longUrl }
       });
       const { data } = response.data;
       setLoading(false);
-      navigate("/shorturl/" + data.short);
+      navigate("/shorturl/s-" + data.urlId);
     } catch (error) {
       setLoading(false);
       notify(error.response.data.message, "error");
@@ -46,7 +46,7 @@ function Home({ notify }) {
             className="shadow-sm  bg-gray-50 border max-w-2xl border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             placeholder="Enter URL Here"
             required
-            onChange={(e) => setFullUrl(e.target.value)}
+            onChange={(e) => setLongUrl(e.target.value)}
           />
           <button
             type="submit"
@@ -84,7 +84,7 @@ function Home({ notify }) {
             Simple and fast URL shortener!
           </h1>
           <p className=" md:text-lg  text-sm font-thin text-gray-300">
-            ShortURL allows to reduce long links from Instagram, Facebook,
+            Sjorty allows to reduce long links from Instagram, Facebook,
             YouTube, Twitter, Linked In and top sites on the Internet, just
             paste the long URL and click the Shorten URL button. On the next
             screen, copy the shortened URL and share it on websites, chat and

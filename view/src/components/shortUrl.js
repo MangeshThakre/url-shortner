@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 function ShortUrl() {
-  const { shortUrl } = useParams();
+  const { urlId } = useParams();
   const [iscopied, setIscopied] = useState(false);
   const URL = process.env.REACT_APP_URL;
   const copyContent = async () => {
     try {
-      await navigator.clipboard.writeText(URL + "/" + shortUrl);
+      await navigator.clipboard.writeText(URL + "/" + urlId);
       await setIscopied(true);
       setTimeout(() => setIscopied(false), 5000);
     } catch (err) {
@@ -33,7 +33,7 @@ function ShortUrl() {
             <input
               type="search"
               id="search-dropdown"
-              defaultValue={URL + "/" + shortUrl}
+              defaultValue={URL + "/" + urlId}
               disabled
               className="block  font-bold p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg  border  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
               style={iscopied ? { backgroundColor: "#F7BE38" } : null}
@@ -54,7 +54,7 @@ function ShortUrl() {
           Track{" "}
           <Link
             className="  text-blue-400  cursor-pointer"
-            to={"/track/" + shortUrl}
+            to={"/track/" + urlId}
           >
             the total of clicks{" "}
           </Link>
